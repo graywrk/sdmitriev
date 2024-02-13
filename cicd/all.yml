@@ -8,6 +8,11 @@
         - git
         - vim
         - python3-pip
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-compose-plugin
+        - docker-buildx-plugin
     
     - name: Checkout repo
       ansible.builtin.git:
