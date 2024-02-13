@@ -8,3 +8,8 @@ services:
       - .:/usr/src/app
     ports:
       - "8000:8000"
+    labels:
+      - traefik.backend=app
+      - traefik.frontend.rule=Host:sdmitriev.pro
+      - traefik.docker.network=web
+      - traefik.port=8000
