@@ -1,0 +1,24 @@
+- hosts: app
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt: 
+        pkg:
+        - htop
+        - glances
+        - git
+        - vim
+        - python3-pip
+    
+    - name: Checkout repo
+      ansible.builtin.git:
+        repo: 'https://github.com/graywrk/sdmitriev.git'
+        dest: '/opt/site/sdmitriev'
+
+    - name: Install docker-compose
+      ansible.builtin.pip:
+        name: docker-compose
+
+    - name: Run docker-compose
+      community.docker.docker_compose:
+        recreate: 'always'
+        project_src: '/opt/site/sdmitriev'
