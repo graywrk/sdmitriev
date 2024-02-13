@@ -1,5 +1,9 @@
 version: "3"
 
+networks:
+  web:
+    external: true
+
 services:
   app:
     command: "poetry run python manage.py runserver 0.0.0.0:8000"
@@ -13,3 +17,5 @@ services:
       - traefik.frontend.rule=Host:sdmitriev.pro
       - traefik.docker.network=web
       - traefik.port=8000
+    networks:
+      - web
