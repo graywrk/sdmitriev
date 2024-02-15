@@ -26,4 +26,5 @@
     - name: Run docker-compose
       community.docker.docker_compose:
         recreate: 'always'
+        build: true
         project_src: '/opt/site/sdmitriev'
