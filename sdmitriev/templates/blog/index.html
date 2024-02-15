@@ -9,7 +9,7 @@
                 {{ post.created_on.date }}
             </small>
             <p>
-                {{ post.body | slice:":400" }}...
+                {{ post.body | safe | slice:":400" }}...
             </p>
         {% endfor %}
     {% endblock posts %}
