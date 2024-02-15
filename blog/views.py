@@ -1,3 +1,4 @@
+import makrdown
 from django.shortcuts import render
 from blog.models import Post
 
@@ -11,6 +12,7 @@ def blog_index(request):
 
 def blog_detail(request, pk):
     post = Post.objects.get(pk=pk)
+    post.body = md.converter(post.body)
     context = {
         "post": post,
     }
