@@ -19,7 +19,7 @@ services:
       - traefik.backend=nginx
       - traefik.frontend.rule=Host:sdmitriev.pro
       - traefik.docker.network=web
-      - traefik.port=1337
+      - traefik.port=80
     networks:
       - web
       - djangonetwork
