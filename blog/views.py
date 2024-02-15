@@ -4,7 +4,6 @@ from blog.models import Post
 
 
 def blog_index(request):
-    md = markdown.Markdown(extensions=["fenced_code"])
     posts = Post.objects.all().order_by("-created_on")
     context = {
         "posts": posts,
@@ -12,6 +11,7 @@ def blog_index(request):
     return render(request, "blog/index.html", context)
 
 def blog_detail(request, pk):
+    md = markdown.Markdown(extensions=["fenced_code"])
     post = Post.objects.get(pk=pk)
     post.body = md.converter(post.body)
     context = {
