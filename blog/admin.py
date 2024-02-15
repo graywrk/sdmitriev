@@ -3,6 +3,8 @@ from blog.models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
-    pass
+    formfield_overrides = {
+        models.TextField: { 'widget': MDEditorWidget}
+    }
 
 admin.site.register(Post, PostAdmin)
