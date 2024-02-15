@@ -16,7 +16,7 @@ services:
     volumes:
       - static_volume:/home/app/web/staticfiles
     labels:
-      - traefik.backend=app
+      - traefik.backend=nginx
       - traefik.frontend.rule=Host:sdmitriev.pro
       - traefik.docker.network=web
       - traefik.port=1337
