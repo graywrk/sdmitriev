@@ -12,6 +12,15 @@ then
 fi
 
 poetry install
+poetry run python manage.py makemigrations
 poetry run python manage.py migrate
+poetry run python manage.py createcachetable
+poetry run python manage.py collectstatic --no-input --clear
+
+if [ "$DJANGO_SUPERUSER_USERNAME" ]
+then
+    poetry run python manage.py createsuperuser \
+        --noinput 
+fi
 
 exec "$@"

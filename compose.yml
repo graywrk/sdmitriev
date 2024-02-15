@@ -13,6 +13,8 @@ services:
       - 1337:80
     depends_on:
       - app
+    volumes:
+      - static_volume:/home/app/web/staticfiles
     labels:
       - traefik.backend=app
       - traefik.frontend.rule=Host:sdmitriev.pro
@@ -32,11 +34,18 @@ services:
     links:
       - db:db
     volumes:
-      - .:/usr/src/app
+      - static_volume:/home/app/web/staticfiles
     expose:
       - 8000
     networks:
       - djangonetwork
+    environment:
+      - DATABASE=${DATABASE}
+      - SQL_HOST=${SQL_HOST}
+      - SQL_PORT=${SQL_PORT}
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
+      - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
   db:
     image: postgres:15
     container_name: db
@@ -51,3 +60,4 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:
