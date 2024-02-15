@@ -1,2 +1,2 @@
 # sdmitriev
-Personal Home Page
+Personal Home Page and blog
