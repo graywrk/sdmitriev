@@ -4,7 +4,10 @@ from blog.models import Post
 
 
 def blog_index(request):
+    md = markdown.Markdown(extensions=["fenced_code"])
     posts = Post.objects.all().order_by("-created_on")
+    for post in post:
+        post.body = md.convert(post.body)
     context = {
         "posts": posts,
     }
