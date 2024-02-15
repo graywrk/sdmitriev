@@ -7,24 +7,35 @@ networks:
     driver: bridge
 
 services:
+  nginx:
+    build: ./Docker/nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - app
+    labels:
+      - traefik.backend=app
+      - traefik.frontend.rule=Host:sdmitriev.pro
+      - traefik.docker.network=web
+      - traefik.port=1337
+    networks:
+      - web
+      - djangonetwork
+
   app:
-    command: "poetry run python manage.py runserver 0.0.0.0:8000"
-    build: .
+    command: "poetry run gunicorn sdmitriev.wsgi:application --bind 0.0.0.0:8000"
+    build: 
+      context: ./
+      dockerfile: ./Docker/Dockerfile
     depends_on:
       - db
     links:
       - db:db
     volumes:
       - .:/usr/src/app
-    ports:
-      - "8000:8000"
-    labels:
-      - traefik.backend=app
-      - traefik.frontend.rule=Host:sdmitriev.pro
-      - traefik.docker.network=web
-      - traefik.port=8000
+    expose:
+      - 8000
     networks:
-      - web
       - djangonetwork
   db:
     image: postgres:15
