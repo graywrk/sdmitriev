@@ -13,7 +13,7 @@ def blog_index(request):
 def blog_detail(request, pk):
     md = markdown.Markdown(extensions=["fenced_code"])
     post = Post.objects.get(pk=pk)
-    post.body = md.converter(post.body)
+    post.body = md.convert(post.body)
     context = {
         "post": post,
     }
