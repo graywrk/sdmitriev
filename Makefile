@@ -1,8 +1,11 @@
 run:
-	docker network create web || true && docker-compose up
+	docker network create web || true && docker-compose up --build
 
 deploy:
 	ansible-playbook -i cicd/inventory cicd/all.yml
 
-make qq:
+qq:
 	git add . && git commit -am "Auto commit" && git push && ansible-playbook -i cicd/inventory cicd/all.yml 
+
+migrate:
+	docker network create web || true && docker-compose up --build && docker-compose exec app poetry run python manage.py migrate --noinput

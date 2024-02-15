@@ -19,3 +19,14 @@ services:
       - traefik.port=8000
     networks:
       - web
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=sdmitriev
+      - POSTGRES_PASSWORD=sdmitriev
+      - POSTGRES_DB=sdmitriev
+
+volumes:
+  postgres_data:

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <small>
+        {{ post.creted_on.date }}
+    </small>
+    <p>
+        {{ post.body | linebreaks }}
+    </p>
+{% endblock content %}
