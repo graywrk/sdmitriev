@@ -28,7 +28,7 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     url('meditor/', include('meditor.urls')),
     "robots.txt", TemplateView.as_view(template_name="robots/txt",
-                                       content_type="text/plain")),
+                                       content_type="text/plain"),
 ]
 
 if settings.DEBUG:
